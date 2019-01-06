@@ -5,8 +5,8 @@ describe JobsProcessor do
 
   describe 'process' do
     context 'when there are no jobs' do
-      it 'will return and empty string' do
-        expect(subject.process('')).to eq ''
+      it 'will return an empty string' do
+        expect(subject.process('')).to eq []
       end
     end
     
