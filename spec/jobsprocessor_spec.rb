@@ -24,9 +24,9 @@ describe JobsProcessor do
                    c =>}
 	actual = subject.process(input)
         expect(actual.length).to eq 3
-        expect(actual.include?('a')).to be_true
-        expect(actual.include?('b')).to be_true
-        expect(actual.include?('c')).to be_true       
+        expect(actual.include?('a')).to be true
+        expect(actual.include?('b')).to be true
+        expect(actual.include?('c')).to be true       
       end
     end
     
@@ -38,9 +38,9 @@ describe JobsProcessor do
       it 'it will return the jobs' do
 	actual = subject.process(input)
         expect(actual.length).to eq 3
-        expect(actual.include?('a')).to be_true
-        expect(actual.include?('b')).to be_true
-        expect(actual.include?('c')).to be_true       
+        expect(actual.include?('a')).to be true
+        expect(actual.include?('b')).to be true
+        expect(actual.include?('c')).to be true       
       end
 
       it 'the dependent job precedes the one it is dependent on' do
@@ -60,12 +60,12 @@ describe JobsProcessor do
       it 'it will return the jobs' do
 	actual = subject.process(input)
         expect(actual.length).to eq 6
-        expect(actual.include?('a')).to be_true
-        expect(actual.include?('b')).to be_true
-        expect(actual.include?('c')).to be_true       
-        expect(actual.include?('d')).to be_true       
-        expect(actual.include?('e')).to be_true       
-        expect(actual.include?('f')).to be_true       
+        expect(actual.include?('a')).to be true
+        expect(actual.include?('b')).to be true
+        expect(actual.include?('c')).to be true       
+        expect(actual.include?('d')).to be true       
+        expect(actual.include?('e')).to be true       
+        expect(actual.include?('f')).to be true       
        end
 
       it 'the dependent job precedes the one it is dependent on' do
