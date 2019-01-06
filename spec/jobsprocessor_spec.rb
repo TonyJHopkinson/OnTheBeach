@@ -83,7 +83,7 @@ describe JobsProcessor do
                       c => c) 
                   }
       it 'will raise an error' do
-        expect(subject.process(input)).to raise_error('A job cannot depend on itself')
+        expect{subject.process(input)}.to raise_error('A job cannot depend on itself')
       end
     end
 
@@ -96,7 +96,7 @@ describe JobsProcessor do
                         f => b)
                    }
       it 'will raise an error' do
-        expect(subject.process(input)).to raise_error('Jobs cannot have circulardependences')
+        expect{subject.process(input)}.to raise_error('Jobs cannot have circular dependencies')
       end
     end
   end

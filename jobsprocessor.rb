@@ -1,9 +1,7 @@
-#require 'pry'
 class JobsProcessor
   def process(input)
     parsed_input = parse_jobs(input)
     output = []
-#    binding.pry
     counts = dependency_counts(parsed_input).sort_by{|k,v| v}.to_h	
     pending = counts.select{|k,v| v == 0}.keys 
     while (pending.length > 0) do
@@ -16,6 +14,7 @@ class JobsProcessor
       counts.reject!{|k,v| output.include?(k)}
       pending = counts.select{|k,v| v == 0}.keys 
     end 
+    raise 'Jobs cannot have circular dependencies' unless counts.empty?
     output.reverse
   end
 
@@ -44,7 +43,11 @@ class JobsProcessor
       if parts.length == 1
         jobs[parts[0]] = []
       else
-        jobs[parts[0]] = [parts[1]] 
+        if parts[0] == parts[1]
+          raise 'A job cannot depend on itself'
+        else
+          jobs[parts[0]] = [parts[1]] 
+        end
       end  
     end
     jobs
