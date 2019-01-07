@@ -21,24 +21,22 @@ class JobsProcessor
   private
   
   def dependency_counts(input)
-    result = {}
-    input.each do |job,dependencies|
+    input.reduce({}) do |counts,(job,dependencies)|
       unless dependencies.empty?
-        if result.has_key?(dependencies[0])
-          result[dependencies[0]] += 1
+        if counts.has_key?(dependencies[0])
+          counts[dependencies[0]] += 1
         else
-          result[dependencies[0]] = 1 
+          counts[dependencies[0]] = 1 
         end  
       end
-      result[job] = 0 unless result.has_key?(job)
+      counts[job] = 0 unless counts.has_key?(job)
+      counts
     end
-    result
   end
  
   def parse_jobs(input)
-    jobs = {}
-    lines = input.split(/\n+/).select{|line| !line.strip.empty?} 
-    lines.each do |line|
+   lines = input.split(/\n+/).select{|line| !line.strip.empty?} 
+    lines.reduce({}) do |jobs,line|
       parts = line.split('=>').map{|job| job.strip}
       if parts.length == 1
         jobs[parts[0]] = []
@@ -49,8 +47,8 @@ class JobsProcessor
           jobs[parts[0]] = [parts[1]] 
         end
       end  
+      jobs 
     end
-    jobs
   end  
 end
 
